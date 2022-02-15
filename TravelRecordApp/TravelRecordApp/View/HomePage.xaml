@@ -1,8 +1,18 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TravelRecordApp.View"
+            xmlns:ViewModel="clr-namespace:TravelRecordApp.ViewModel"
              x:Class="TravelRecordApp.View.HomePage">
-    <StackLayout>
-            <Label Text="Hello, this is main page" />
-        </StackLayout>
-</ContentPage>
+
+    <TabbedPage.BindingContext>
+        <ViewModel:MainViewModel/>
+    </TabbedPage.BindingContext>
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem Text="Add"
+                     Command="{Binding TabAddCommand}"/>
+    </TabbedPage.ToolbarItems>
+    <local:HistoryPage Title="History"/>
+    <local:MapPage Title="Map"/>
+    <local:ProfilePage Title="Profile"/>
+</TabbedPage>

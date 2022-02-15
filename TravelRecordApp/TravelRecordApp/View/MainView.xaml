@@ -11,14 +11,13 @@
         <StackLayout Margin="15"
                  VerticalOptions="Center">
             <Entry Placeholder="Email"
-                   Text="{Binding EmailEntry, Mode=TwoWay}"
+                   Text="Test@email.com"
                    Keyboard="Email"/>
             <Entry Placeholder="Password"
                    IsPassword="True"
-                   Text="{Binding PasswordEntry, Mode=TwoWay}"/>
+                   Text="Test123"/>
             <Button Text="Login"
-                    BackgroundColor="CadetBlue"
-                    TextColor="White"
-                    Command="{Binding LoginCommand}"/>
+                    Command="{Binding LoginCommand}"
+                    Style="{StaticResource normalButton}"/>
         </StackLayout>
 </ContentView>
