@@ -27,10 +27,11 @@ namespace TravelRecordApp.ViewModel
 
         public static void ReadDataBase()
         {
-            SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation);
-            conn.CreateTable<Post>();
-            var postList = conn.Table<Post>().ToList();
-            conn.Close();
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Post>();
+                var postList = conn.Table<Post>().ToList();
+            }
         }
         private void SaveTravel()
         {
@@ -39,24 +40,29 @@ namespace TravelRecordApp.ViewModel
                 Experience = ExperienceEnrty
             };
 
-            SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation);
-            conn.CreateTable<Post>();
-            int rows = conn.Insert(post);
-            conn.Close();
+            // The using statement calls Dispose method immediately after the closing bracket
+            // So that we don't have to recall closing the connection, connection is being automatically disposed.
+            using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
+            {
+                conn.CreateTable<Post>();
+                int rows = conn.Insert(post);
 
-            if (rows > 0) // At least one element got inserted to the database, insertion successfull
-            {
-                App.Current.MainPage.DisplayAlert("Success", "Experience successfully inserted", "Ok");
+
+                if (rows > 0) // At least one element got inserted to the database, insertion successfull
+                {
+                    App.Current.MainPage.DisplayAlert("Success", "Experience successfully inserted", "Ok");
+                }
+                else
+                {
+                    App.Current.MainPage.DisplayAlert("Fail", "Experience failed to be inserted", "Ok");
+                }
             }
-            else
-            {
-                App.Current.MainPage.DisplayAlert("Fail", "Experience failed to be inserted", "Ok");
-            }           
         }
 
         public MainViewModel()
         {
-
+            PasswordEntry = "Test123";
+            EmailEntry = "Test@gmail.com";
         }
         private void TabAdd()
         {

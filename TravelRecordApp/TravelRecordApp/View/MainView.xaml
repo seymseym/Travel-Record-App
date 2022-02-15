@@ -11,11 +11,11 @@
         <StackLayout Margin="15"
                  VerticalOptions="Center">
             <Entry Placeholder="Email"
-                   Text="Test@email.com"
+                   Text="{Binding EmailEntry, Mode=TwoWay}"
                    Keyboard="Email"/>
             <Entry Placeholder="Password"
                    IsPassword="True"
-                   Text="Test123"/>
+                   Text="{Binding PasswordEntry, Mode=TwoWay}"/>
             <Button Text="Login"
                     Command="{Binding LoginCommand}"
                     Style="{StaticResource normalButton}"/>
