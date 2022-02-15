@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TravelRecordApp.View.MainView"
+             xmlns:ViewModel="clr-namespace:TravelRecordApp.ViewModel">
+
+    <ContentView.BindingContext>
+        <ViewModel:MainViewModel/>
+    </ContentView.BindingContext>  
+    
+        <StackLayout Margin="15"
+                 VerticalOptions="Center">
+            <Entry Placeholder="Email"
+                   Text="{Binding EmailEntry, Mode=TwoWay}"
+                   Keyboard="Email"/>
+            <Entry Placeholder="Password"
+                   IsPassword="True"
+                   Text="{Binding PasswordEntry, Mode=TwoWay}"/>
+            <Button Text="Login"
+                    BackgroundColor="CadetBlue"
+                    TextColor="White"
+                    Command="{Binding LoginCommand}"/>
+        </StackLayout>
+</ContentView>
