@@ -10,17 +10,21 @@ using Xamarin.Forms.Xaml;
 namespace TravelRecordApp.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
     public partial class HistoryPage : ContentPage
     {
-        public HistoryPage()
+        private MainViewModel viewModel;
+        public HistoryPage() // constructor 
         {
             InitializeComponent();
+            viewModel = new MainViewModel();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            MainViewModel.ReadDataBase();
+            viewModel.ReadDataBase();
+            postListView.ItemsSource = viewModel.PostList;
         }
     }
 }

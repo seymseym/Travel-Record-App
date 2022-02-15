@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -16,6 +17,13 @@ namespace TravelRecordApp.ViewModel
         public ICommand LoginCommand => new Command(Login);
         public ICommand TabAddCommand => new Command(TabAdd);
         public ICommand SaveTravelCommand => new Command(SaveTravel);
+        private ObservableCollection<Post> _postList;
+        public ObservableCollection<Post> PostList
+        {
+            get { return _postList; }
+            set { _postList = value; }
+        }
+
 
         private string _experienceEntry;
 
@@ -25,12 +33,13 @@ namespace TravelRecordApp.ViewModel
             set { SetProperty(ref _experienceEntry, value); }
         }
 
-        public static void ReadDataBase()
+        public void ReadDataBase()
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.DatabaseLocation))
             {
                 conn.CreateTable<Post>();
                 var postList = conn.Table<Post>().ToList();
+                PostList = new ObservableCollection<Post>(postList);
             }
         }
         private void SaveTravel()
